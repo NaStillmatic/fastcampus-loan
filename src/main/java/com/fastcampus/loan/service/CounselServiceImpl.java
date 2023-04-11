@@ -54,7 +54,18 @@ public class CounselServiceImpl implements CounselService {
         counsel.setZipCode(request.getZipCode());
 
         counselRepository.save(counsel);
-        
+
         return modelMapper.map(counsel, Response.class);
+    }
+
+    @Override
+    public void delete(Long counselId) {
+        Counsel counsel = counselRepository.findById(counselId).orElseThrow(() -> {
+            throw new BaseException(ResultType.SYSTEM_ERROR);
+        });
+
+        counsel.setIsDeleted(true);
+
+        counselRepository.save(counsel);
     }
 }

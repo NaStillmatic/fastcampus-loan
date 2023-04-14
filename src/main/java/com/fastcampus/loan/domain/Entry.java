@@ -1,5 +1,6 @@
 package com.fastcampus.loan.domain;
 
+import com.fastcampus.loan.domain.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -17,22 +18,16 @@ import java.math.BigDecimal;
 @DynamicInsert
 @DynamicUpdate
 @Where(clause = "is_deleted=false")
-public class Judgment extends BaseEntity {
+public class Entry extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
-    private Long judgmentId;
+    private Long entryId;
 
     @Column(columnDefinition = "bigint NOT NULL COMMENT '신청 ID'")
     private Long applicationId;
 
-    @Column(columnDefinition = "varchar(12) DEFAULT NULL COMMENT '심사자'")
-    private String name;
-
-    @Column(columnDefinition = "decimal(15,2) DEFAULT NULL COMMENT '승인 금액'")
-    private BigDecimal approvalAmount;
-
-    @Column(columnDefinition = "decimal(5,4) DEFAULT NULL COMMENT '승인 금리'")
-    private BigDecimal approvalInterestRate;
+    @Column(columnDefinition = "decimal(15,2) NOT NULL COMMENT '집행 금액'")
+    private BigDecimal entryAmount;
 }

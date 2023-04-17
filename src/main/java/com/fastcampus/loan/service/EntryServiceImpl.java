@@ -50,7 +50,9 @@ public class EntryServiceImpl implements EntryService {
 
     @Override
     public Response get(Long applicationId) {
-        Entry entry = entryRepository.findByApplicationId(applicationId);
+        Entry entry = entryRepository.findByApplicationId(applicationId).orElseThrow(() -> {
+            throw new BaseException(ResultType.SYSTEM_ERROR);
+        });
         return modelMapper.map(entry, Response.class);
     }
 

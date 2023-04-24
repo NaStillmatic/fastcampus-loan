@@ -53,14 +53,14 @@ public class ApplicationController extends AbstractController {
         return ok(applicationService.acceptTerms(applicationId, request));
     }
 
-    @PostMapping("/{applicationId}/files")
+    @PostMapping(value = "/{applicationId}/files")
     public ResponseDTO<Void> upload(@PathVariable Long applicationId, MultipartFile file) throws IllegalStateException {
         fileStorageService.save(applicationId, file);
         return ok();
     }
 
     @GetMapping("/{applicationId}/files")
-    public ResponseEntity<Resource> dowonload(@PathVariable Long applicationId, @RequestParam(value = "filename") String filename) throws IllegalStateException, IOException {
+    public ResponseEntity<Resource> download(@PathVariable Long applicationId, @RequestParam(value = "filename") String filename) throws IllegalStateException, IOException {
         Resource file = fileStorageService.load(applicationId, filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);

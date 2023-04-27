@@ -1,6 +1,5 @@
 package com.fastcampus.loan.domain;
 
-import com.fastcampus.loan.domain.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;

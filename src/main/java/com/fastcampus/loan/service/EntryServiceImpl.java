@@ -68,8 +68,8 @@ public class EntryServiceImpl implements EntryService {
 
         entryRepository.save(entry);
 
-        Long appicationId = entry.getApplicationId();
-        balanceService.update(appicationId,
+        Long applicationId = entry.getApplicationId();
+        balanceService.update(applicationId,
                 BalanceDTO.UpdateRequest.builder()
                         .beforeEntryAmount(beforeEntryAmount)
                         .afterEntryAmount(request.getEntryAmount())
